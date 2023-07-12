@@ -26,6 +26,15 @@
 			loading = false;
 		}
 	};
+
+	async function forgot() {
+		if (!email) {
+			return alert('enter an email to reset password');
+		}
+		const { error } = await supabase.auth.resetPasswordForEmail(email);
+		if (error) console.error(error);
+		alert('sent email to reset password');
+	}
 </script>
 
 <div class="sm:mx-auto sm:w-full sm:max-w-md">
@@ -72,9 +81,13 @@
 					</div>
 
 					<div class="text-sm leading-6">
-						<a href="#" class="font-semibold text-green-600 hover:text-green-500"
-							>Forgot password?</a
+						<button
+							type="button"
+							on:click={forgot}
+							class="font-semibold text-green-600 hover:text-green-500"
 						>
+							Forgot password?
+						</button>
 					</div>
 				</div>
 
@@ -87,7 +100,7 @@
 						{#if loading}
 							Signing in...
 						{:else}
-							Send magic link
+							Sign in
 						{/if}</button
 					>
 				</div>

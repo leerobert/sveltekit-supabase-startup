@@ -10,7 +10,7 @@
 	let email: string;
 	let password: string;
 
-	const handleLogin = async () => {
+	async function handleLogin() {
 		try {
 			loading = true;
 			const { error } = await supabase.auth.signUp({
@@ -29,7 +29,7 @@
 		} finally {
 			loading = false;
 		}
-	};
+	}
 </script>
 
 <div class="sm:mx-auto sm:w-full sm:max-w-md">
@@ -91,3 +91,8 @@
 		</div>
 	</div>
 </div>
+
+<p class="mt-10 text-center text-sm text-gray-500">
+	Already have an account?
+	<a href="/login" class="font-semibold leading-6 text-green-600 hover:text-green-500">Sign in</a>
+</p>
