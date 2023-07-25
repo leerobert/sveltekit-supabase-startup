@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import SignInButtons from '../SignInButtons.svelte';
 	import type { PageData } from './$types';
 	export let data: PageData;
 
@@ -31,7 +32,9 @@
 		if (!email) {
 			return alert('enter an email to reset password');
 		}
-		const { error } = await supabase.auth.resetPasswordForEmail(email);
+		const { error } = await supabase.auth.resetPasswordForEmail(email, {
+			redirectTo: `${location.origin}/forgot`
+		});
 		if (error) console.error(error);
 		alert('sent email to reset password');
 	}
@@ -56,7 +59,7 @@
 					</div>
 				</div>
 				<div>
-					<label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+					<label for="email" class="block text-sm font-medium text-gray-700">Password</label>
 					<div class="mt-1">
 						<input
 							type="password"
@@ -81,13 +84,9 @@
 					</div>
 
 					<div class="text-sm leading-6">
-						<button
-							type="button"
-							on:click={forgot}
-							class="font-semibold text-green-600 hover:text-green-500"
-						>
+						<a href="/forgot-password" class="font-semibold text-green-600 hover:text-green-500">
 							Forgot password?
-						</button>
+						</a>
 					</div>
 				</div>
 
@@ -103,6 +102,19 @@
 							Sign in
 						{/if}</button
 					>
+				</div>
+
+				<div class="mt-10">
+					<div class="relative">
+						<div class="absolute inset-0 flex items-center" aria-hidden="true">
+							<div class="w-full border-t border-gray-200" />
+						</div>
+						<div class="relative flex justify-center text-sm font-medium leading-6">
+							<span class="bg-white px-6 text-gray-900">Or continue with</span>
+						</div>
+					</div>
+
+					<SignInButtons {supabase} />
 				</div>
 			</form>
 		</div>
