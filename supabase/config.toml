@@ -83,7 +83,7 @@ gcp_jwt_path = "supabase/gcloud.json"
 
 [auth.external.google]
 enabled = true
-client_id = ""
-secret = ""
+client_id = "975131093613-hanuo4oa3r5fjk15o0t32r3jvupug72u.apps.googleusercontent.com"
+secret = "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"
 # Overrides the default auth redirectUrl.
 # redirect_uri = ""
